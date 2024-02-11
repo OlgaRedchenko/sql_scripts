@@ -1,0 +1,69 @@
+CREATE TABLE product (
+   product_id integer PRIMARY KEY
+  ,brand varchar
+  ,product_line varchar
+  ,product_class varchar
+  ,product_size varchar
+  ,standard_cost float
+)
+
+CREATE TABLE customer(
+    customer_id integer PRIMARY KEY
+    ,first_name varchar NOT NULL
+    ,last_name varchar NOT NULL
+    ,gender varchar
+    ,DOB timestamp
+    ,job_title varchar
+    ,job_industry_category varchar
+    ,wealth_segment varchar
+    ,deceased_indicator varchar
+    ,owns_car varchar
+    ,address varchar
+    ,postcode	integer
+    ,state	varchar
+    ,country varchar
+    ,property_valuation integer
+    )
+    
+CREATE TABLE transactions(
+    transaction_id integer PRIMARY KEY
+    ,product_id integer NOT NULL
+    ,customer_id integer NOT NULL
+    ,transaction_date timestamp NOT NULL
+    ,online_order bool NOT NULL
+    ,order_status varchar NOT NULL
+    ,list_price float NOT NULL
+)
+insert into transactions values (1, 2, 2950, '2017-02-25', false, 'Approved', 71.49)
+,(2, 3, 3120, '2017-05-21', true, 'Approved', 2091.47)
+,(3, 37, 402, '2017-10-16', false, 'Approved', 1793.43)
+,(4, 88, 3135, '2017-08-31', false, 'Approved', 1198.46)
+,(5, 78, 787, '2017-01-10', true, 'Approved', 1765.3)
+,(6, 25, 2339, '2017-03-08', true, 'Approved', 1538.99)
+,(7, 22, 1542, '2017-04-21', true, 'Approved',	60.34)
+,(8, 15, 2459, '2017-07-15', false, 'Approved', 1292.84)
+,(9, 67, 1305, '2017-08-10', false, 'Approved', 1071.23)
+,(10, 12, 3262, '2017-08-30', true, 'Approved', 1231.15)
+
+insert into product values (2, 'Solex', 'Standard', 'medium', 'medium', 53.62)
+,(3, 'Trek Bicycles', 'Standard', 'medium', 'large', 388.92)
+,(37, 'OHM Cycles',	'Standard',	'low',	'medium', 248.82)
+,(88, 'Norco Bicycles',	'Standard',	'medium',	'medium', 381.10)
+,(78, 'Giant Bicycles',	'Standard', 'medium',	'large', 709.48)
+,(25, 'Giant Bicycles',	'Road',	'medium',	'medium', 829.65)
+,(22, 'WeareA2B',	'Standard',	'medium',	'medium', 45.26)
+,(15, 'WeareA2B', 'Standard',	'medium',	'medium', 13.44)
+,(67, 'Solex',	'Standard',	'medium',	'large', 380.74)
+,(12, 'WeareA2B',	'Standard',	'medium',	'medium', 161.60)
+
+insert into customer values (3120, 'Lauree', 'ODonnell', 'Female', '1979-02-04', 'Clinical Specialist', 'Health', 'Mass Customer',	'N', 'Yes', '32 Elmside Point',	2560,	'NSW',	'Australia', 6)
+,(2950, 'Kristos',	'Anthony', 'Male', '1955-01-11', 'Software Engineer I', 'Financial Services', 	'Mass Customer',	'N',	'Yes',	'3 New Castle Terrace',	3032,	'VIC',	'Australia',	8)
+,(402, 'Berne', 'Donegan',	'Male',	'1977-06-03',	'Desktop Support Technician', 'Retail', 'Affluent Customer', 'N', 'No', '07 New Castle Circle',	2646, 'NSW', 'Australia', 1)
+,(3150,	'Morissa', 'Wolfendell', 'Female', '1991-10-07', 'Sales Associate',	'Financial Services', 'Mass Customer', 'N', 'No', '0 Warrior Alley', 2021, 'NSW', 'Australia', 10)
+,(787,	'Norma', 'Batrim', 'Female', '1996-12-15', '', 'Retail','Affluent Customer', 'N',	'yes',	'79 Arkansas Drive', 3008, 'VIC', 'Australia', 10)
+,(2339,	'Damien',	'Haddeston',	'Male',	'1958-12-28',	'Web Designer', 'II	Property',	'Affluent Customer',	'N',	'yes',	'533 Ramsey Center', 4507, 'QLD',	'Australia', 5)
+,(1542,	'Sanders',	'Fernyhough',	'Male',	'1978-07-27',	'Food Chemist',	'Health',	'Mass Customer',  'N',	'Yes', '2 Eastwood Street',	2153,	'NSW',	'Australia', 10)
+,(2459,	'Jeanna',	'Naulls',	'Female', '1986-01-10', 'Quality Engineer',	'Manufacturing', 'High Net Worth', 'N',	'no',	'22 Hayes Center', 3156, 'VIC',	'Australia', 10)
+,(1305,	'Averil',	'Gentiry',	'Male',	'1970-03-01', 'Executive Secretary', 'Financial Services', 'High Net Worth', 'N',	'Yes',	'515 Bunting Point', 4115,	'QLD',	'Australia', 8)
+,(3262,	'Maynord',	'LEpiscopi', 'Male', '1959-10-14', 'Product Engineer', 'Entertainment',	'Mass Customer',	'N',	'No', '3 Myrtle Pass',	2095,	'NSW', 	'Australia', 12);
+
