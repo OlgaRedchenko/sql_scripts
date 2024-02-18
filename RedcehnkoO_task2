@@ -1,0 +1,57 @@
+--задание1
+
+select distinct brand  
+from  transaction_20240101 t
+where standard_cost > 1500;
+
+--задание2
+select DISTINCT transaction_id
+FROM transaction_20240101
+where order_status like 'Approved'
+and transaction_date::date between '2017-04-01' AND '2017-04-09';
+
+--задание3
+
+select distinct job_title
+from customer_20240101 c 
+where (job_industry_category like  'IT'
+or job_industry_category like  'Financial Services')
+and job_title like 'Senior%';
+
+--задание4
+select distinct t.brand
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id 
+where c.job_industry_category  like  'Financial Services';
+
+--задание5
+select distinct c.customer_id , c.first_name , c.last_name 
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id 
+where t.brand  like  'Giant Bicycles' 
+or t.brand  like 'Norco Bicycles'
+or t.brand  like 'Trek Bicycles'
+limit 10;
+
+--задание6
+select distinct c.customer_id , c.first_name , c.last_name 
+from customer_20240101 c  left join transaction_20240101 t 
+on c.customer_id = t.customer_id 
+where t.transaction_id is null 
+
+--задание7
+select c.customer_id , c.first_name , c.last_name 
+from customer_20240101 c  left join transaction_20240101 t 
+on c.customer_id = t.customer_id 
+where c.job_industry_category like 'IT'
+and t.standard_cost = (select max(standard_cost)
+from transaction_20240101 t)
+
+--задание8
+select distinct c.customer_id , c.first_name , c.last_name 
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id 
+where t.order_status like 'Approved'
+and (c.job_industry_category like  'IT'
+or c.job_industry_category like  'Health')
+and t.transaction_date::date between '2017-07-07' AND '2017-07-17';
