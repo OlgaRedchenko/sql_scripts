@@ -4,3 +4,14 @@ select job_industry_category, count(customer_id)
 from customer_20240101 c 
 group by job_industry_category
 order by count(customer_id) desc ;
+
+
+--задание3
+
+select t.brand, count(t.transaction_id)
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+where t.online_order like 'True'
+and t.order_status like 'Approved'
+and c.job_industry_category like  'IT'
+group by t.brand;
