@@ -1,0 +1,6 @@
+--задание1
+
+select job_industry_category, count(customer_id)
+from customer_20240101 c 
+group by job_industry_category
+order by count(customer_id) desc ;
