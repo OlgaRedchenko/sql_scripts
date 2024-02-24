@@ -15,3 +15,12 @@ where t.online_order like 'True'
 and t.order_status like 'Approved'
 and c.job_industry_category like  'IT'
 group by t.brand;
+
+--задание4
+select c.customer_id, c.first_name, c.last_name , sum(t.list_price), 
+max(t.list_price), min(t.list_price), count(distinct(t.transaction_id))
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+group by c.customer_id, c.first_name, c.last_name;
+
+
