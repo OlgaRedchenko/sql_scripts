@@ -17,10 +17,19 @@ and c.job_industry_category like  'IT'
 group by t.brand;
 
 --задание4
+
 select c.customer_id, c.first_name, c.last_name , sum(t.list_price), 
 max(t.list_price), min(t.list_price), count(distinct(t.transaction_id))
 from transaction_20240101 t inner join customer_20240101 c 
 on t.customer_id = c.customer_id
 group by c.customer_id, c.first_name, c.last_name;
+
+select c.customer_id, c.first_name, c.last_name,
+sum(t.list_price) over (partition by c.customer_id) as sum_price,
+max(t.list_price) over (partition by c.customer_id) as max_price,
+min(t.list_price) over (partition by c.customer_id) as min_price,
+count(t.transaction_id) over (partition by c.customer_id) as count_transactions
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id;
 
 
