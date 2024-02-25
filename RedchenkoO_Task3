@@ -1,3 +1,4 @@
+
 --задание1
 
 select job_industry_category, count(customer_id)
@@ -83,6 +84,19 @@ select *
 from combained_cte
 where transaction_number = 1
 ;
+
+--задание7
+
+with temporary_table as(
+select *,
+lag(t.transaction_date) over (partition by c.customer_id) as transaction_intercal
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id)
+
+select distinct first_name, last_name, job_title
+from temporary_table
+where transaction_intercal = (select max(transaction_intercal)
+from temporary_table);
 
 
 
