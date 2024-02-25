@@ -5,6 +5,8 @@ from customer_20240101 c
 group by job_industry_category
 order by count(customer_id) desc ;
 
+--задание2
+
 
 --задание3
 
@@ -31,5 +33,40 @@ min(t.list_price) over (partition by c.customer_id) as min_price,
 count(t.transaction_id) over (partition by c.customer_id) as count_transactions
 from transaction_20240101 t inner join customer_20240101 c 
 on t.customer_id = c.customer_id;
+
+--задание5
+
+with customer_max_sum as(
+select  c.customer_id, c.first_name, c.last_name , sum(t.list_price)
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+group by c.customer_id, c.first_name, c.last_name
+having sum(t.list_price) > (select max_price from
+(select c.customer_id, 
+sum(t.list_price) over (partition by c.customer_id) as max_price
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+order by max_price desc 
+limit  1)))
+select first_name, last_name
+from customer_max_sum;
+
+with customer_min_sum as(
+select  c.customer_id, c.first_name, c.last_name , sum(t.list_price)
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+group by c.customer_id, c.first_name, c.last_name
+having sum(t.list_price) = (select max_price from
+(select c.customer_id, 
+sum(t.list_price) over (partition by c.customer_id) as max_price
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+order by max_price  
+limit  1)))
+select first_name, last_name
+from customer_min_sum;
+
+--задание6
+
 
 
