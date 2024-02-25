@@ -7,6 +7,11 @@ order by count(customer_id) desc ;
 
 --задание2
 
+select extract (month from t.transaction_date) AS m , c.job_industry_category , sum(t.list_price)
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+group by m, c.job_industry_category 
+order by m, c.job_industry_category ;
 
 --задание3
 
