@@ -68,5 +68,16 @@ from customer_min_sum;
 
 --задание6
 
+with combained_cte as(
+select *,
+row_number ()over (partition by c.customer_id order by t.transaction_date) as transaction_number
+from transaction_20240101 t inner join customer_20240101 c 
+on t.customer_id = c.customer_id
+order by c.customer_id ,t.transaction_date)
+select *
+from combained_cte
+where transaction_number = 1
+;
+
 
 
